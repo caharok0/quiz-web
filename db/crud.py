@@ -131,6 +131,19 @@ def get_quizes():
     close()
     return quizes
 
+def get_question_after(quiz_id=1, question_id=0):
+    open()
+    cursor.execute=("""SELECT question, id, questions.question, questions, 
+                    answer, questions.wrong1, questions.wrong2, questions.wrong3
+                    FROM questions, quiz_questions
+                    WHERE quiz_questions.quiz_id = ? AND
+                    quiz_questions.quiz_id > ? AND
+                    quiz_questions.quiz_id = questions_id
+                    ORDER BY quiz_questions.id""", (quiz_id, question_id))
+    
+    question = cursor.fatchone()
+    close()
+    return question
 
 def main():
     # create_tables()
