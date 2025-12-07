@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Обери вікторину</title>
 </head>
 <body>
     <h1>Обери собі вікторину</h1>
-    <form method="post" action="/">
-        <select name = "quiz">
+    <form method="POST" action="/">
+        <select name="quiz">
             {% for id, title, description in quizes_list %}
             <option value="{{ id }}">{{ title }}</option>
             {% endfor %}

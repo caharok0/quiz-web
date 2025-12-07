@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестування</title>
+</head>
+<body>
+    <form method="post" action="/test">
+        <input type="hidden" value="{{ question_id }}" name="quest_id">
+        <h1>{{ quest }}</h1>
+        {% for answer in ans_list %}
+        <input type="radio" name="ans" value="{{ answer }}">{{ answer }}
+        {% endfor %}
+        <button type="submit">Відповісти</button>
+    </form>
+</body>
+</html>
