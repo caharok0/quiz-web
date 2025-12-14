@@ -61,6 +61,7 @@ def test():
 
 @app.route("/result")
 def result():
+    session.clear()
     return render_template("result.html",
                             right=session["correct_ans"],
                             wrong=session["wrong_ans"],
