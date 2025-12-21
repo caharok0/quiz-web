@@ -7,6 +7,7 @@ app.config['SECRET_KEY'] = '12345678'
 
 
 def start_session(quiz_id=0):
+    '''''створення сесії для користувача'''
     session['quiz_id'] = quiz_id
     session["last_question_id"] = 0
     session["correct_ans"] = 0
@@ -14,6 +15,7 @@ def start_session(quiz_id=0):
     session["total_ans"] = 0
 
 def question_form(question):
+
     answers_list = [
         question[2],
         question[3],
@@ -30,18 +32,19 @@ def check_answer(question_id, selected_answer):
         session["wrong_ans"] += 1
     session["total_ans"] += 1
 
+#головна сторінка
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == "GET":
-        quizes = get_quizes()
+    if request.method == "GET":# якщо метот GET
+        quizes = get_quizes()# отримуємо вікторини з дб
         start_session(-1)
         return render_template("index.html", quizes_list=quizes)
-    else:
-        quiz_id = request.form.get("quiz")
+    else:# якщо метот пост
+        quiz_id = request.form.get("quiz")#отримуємо номер вікторини
         start_session(quiz_id)
-        return redirect(url_for("test"))
+        return redirect(url_for("test"))#перенаправлення на тест
 
-
+#сторінка тесту
 @app.route("/test", methods=["GET", "POST"])
 def test():
     if not ("quiz_id" in session) or int(session["quiz_id"]) < 0:
@@ -61,12 +64,12 @@ def test():
 
 @app.route("/result")
 def result():
-    session.clear()
-    return render_template("result.html",
+    result = render_template("result.html",
                             right=session["correct_ans"],
                             wrong=session["wrong_ans"],
                             total=session["total_ans"])
-
+    session.clear()
+    return result
 
 if __name__ == '__main__':
     app.run(port=5000)
