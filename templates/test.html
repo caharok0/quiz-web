@@ -1,12 +1,12 @@
-{% extends "base.html" %
-% block title %}Тест{% endblock %
-% block content %}
+{% extends "base.html" %}
+{% block title %}Тест{% endblock %}
+{% block content %}
     <form method="post" action="/test">
         <input type="hidden" value="{{ question_id }}" name="quest_id">
         <h1>{{ quest }}</h1>
         {% for answer in ans_list %}
         <input type="radio" name="ans" value="{{ answer }}">{{ answer }}
         {% endfor %}
-        <button type="submit">Відповісти</button>
+        <button type="submit" class="btn btn-primary btn-lg">обрати</button>
     </form>
 {% endblock %}
